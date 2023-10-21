@@ -105,6 +105,18 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
+    def do_count(self, arg):
+        """Count the number of instances of a class"""
+        args = shlex.split(arg)
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if args[0] in classes:
+            obj_dict = models.storage.all(classes[args[0]])
+            count = len(obj_dict)
+            print(count)
+        else:
+            print("** class doesn't exist **")
     def do_all(self, arg):
         """Prints string representations of instances"""
         args = shlex.split(arg)
